@@ -5,9 +5,9 @@ open Elmish.Ray.Core
 
 type RayProgram<'arg, 'model, 'msg> = internal {
     ElmishProgram : Program<'arg, 'model, 'msg, unit>
-    FpsTarget : int
-    Width : int
-    Height : int
+    FpsTarget : int<FPS>
+    Width : int<Width>
+    Height : int<Height>
     Title : string
   }
 
@@ -15,17 +15,17 @@ type RayProgram<'arg, 'model, 'msg> = internal {
 module RayProgram =
   let mkSimple init update view = {
       ElmishProgram = Program.mkSimple init update view
-      FpsTarget = 60
-      Width = 800
-      Height = 450
+      FpsTarget = 60<FPS>
+      Width = 800<Width>
+      Height = 450<Height>
       Title = "default title"
     }
     
   let mkProgram init update view = {
       ElmishProgram = Program.mkProgram init update view
-      FpsTarget = 60
-      Width = 800
-      Height = 450
+      FpsTarget = 60<FPS>
+      Width = 800<Width>
+      Height = 450<Height>
       Title = "default title"
     }
     

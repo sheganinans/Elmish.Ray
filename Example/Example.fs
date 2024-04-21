@@ -93,3 +93,7 @@ let init () =
   camera.Zoom <- 1f
   { Buildings = buildings; Player = player; Camera = camera; Count = 0 }, Cmd.none
   
+  
+RayProgram.mkProgram init update view
+|> RayProgram.withTermination (fun _ -> WindowShouldClose ()) (fun _ -> CloseWindow ())
+|> RayProgram.runWindow ()
