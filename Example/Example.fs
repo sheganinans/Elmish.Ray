@@ -79,6 +79,16 @@ let update (msg : Msg) (model : Model) =
   let mutable camera = model.Camera
   if IsKeyDown KeyboardKey.Right then player.X <- player.X + 20f
   if IsKeyDown KeyboardKey.Left  then player.X <- player.X - 20f
+  if IsKeyDown KeyboardKey.A then camera.Rotation <- camera.Rotation - 1f
+  if IsKeyDown KeyboardKey.S then camera.Rotation <- camera.Rotation + 1f
+  if camera.Rotation > 40f then camera.Rotation <- 40f
+  if camera.Rotation < -40f then camera.Rotation <- -40f
+  camera.Zoom <- camera.Zoom + (float32 (GetMouseWheelMove ()) * 0.05f)
+  if camera.Zoom > 3f then camera.Zoom <- 3f
+  if camera.Zoom < 0.1f then camera.Zoom <- 0.1f
+  if IsKeyPressed KeyboardKey.R then
+    camera.Zoom <- 1f
+    camera.Rotation <- 0f
   camera.Target <- Vector2 (float32 player.X + 20f, float32 player.Y + 20f)
   model <- { model with Camera = camera; Player = player }
   model, Cmd.none
